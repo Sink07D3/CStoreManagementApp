@@ -29,7 +29,15 @@ namespace StationTankManagementProject
 
         public void LoadNewCStore(CStore newCStore)
         {
+            //disable input
+            //clear visible data
+            //change loadedStore
+            //enable input
+        }
 
+        public void ClearLoadedData()
+        {
+            //
         }
 
     }
