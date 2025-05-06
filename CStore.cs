@@ -9,7 +9,7 @@ namespace StationTankManagementProject
     /// <summary>
     /// CStore object for storing data relating to convenience stores, for manipulating and later storing via the program.
     /// </summary>
-    class CStore
+    public class CStore
     {
         /// <summary>
         /// 
@@ -19,6 +19,18 @@ namespace StationTankManagementProject
         /// 
         /// </summary>
         public string StoreAddress { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public string StoreState { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime StoreShipDate { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public DateTime? StoreShippedDate { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -31,6 +43,9 @@ namespace StationTankManagementProject
         {
             this.StoreNumber = 0;
             this.StoreAddress = string.Empty;
+            this.StoreState = string.Empty;
+            this.StoreShipDate = DateTime.Now;
+            this.StoreShippedDate = DateTime.Now;
             this.StoreTanks = new List<FuelTank>();
         }
 
@@ -40,10 +55,13 @@ namespace StationTankManagementProject
         /// <param name="storeNumber">An integer that is the store number of the desired CStore.</param>
         /// <param name="storeAddress">A string containing the address of the desired CStore.</param>
         /// <param name="tankList">A list of FuelTanks that represent the fuel tanks at this CStore.</param>
-        public CStore (int storeNumber, string storeAddress, List<FuelTank> tankList)
+        public CStore (int storeNumber, string storeAddress, string storeState, DateTime storeShipDate, DateTime? storeShippedDate, List<FuelTank> tankList)
         {
             this.StoreNumber = storeNumber;
             this.StoreAddress = storeAddress;
+            this.StoreState = storeState;
+            this.StoreShipDate = storeShipDate;
+            this.StoreShippedDate = storeShippedDate;
             this.StoreTanks = tankList;
         }
 
@@ -52,7 +70,7 @@ namespace StationTankManagementProject
     /// <summary>
     /// FuelTank object, used for storing data pertaining to the fuel tanks associated with a convenience store.
     /// </summary>
-    class FuelTank
+    public class FuelTank
     {
         /// <summary>
         /// 
@@ -80,7 +98,10 @@ namespace StationTankManagementProject
         /// <param name="vapor">A bool that states whether or not this tank has a vapor lid.</param>
         public FuelTank(int tankNum, FuelType storedFuel, int tankCapacity, bool vapor)
         {
-
+            TankNumber = tankNum;
+            TankFuel = storedFuel;
+            TankCapacity = tankCapacity;
+            HasVapor = vapor;
         }
 
     }

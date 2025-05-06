@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\corha\source\repos\StationTankManagementProject\obj\Debug\net8.0-windows\
+C:\Users\kingc\Documents\GitHub\CStoreManagementApp\obj\Debug\net8.0-windows\
 StationTankManagementProject
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\corha\source\repos\StationTankManagementProject\App.xaml
+C:\Users\kingc\Documents\GitHub\CStoreManagementApp\App.xaml
 21520454520
 
 8-1754824500
 198-352714763
 AddStoreWindow.xaml;MainWindow.xaml;
 
-True
+False
 

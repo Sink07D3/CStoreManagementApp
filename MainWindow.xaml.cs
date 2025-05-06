@@ -16,9 +16,21 @@ namespace StationTankManagementProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CStore loadedStore;
+
+
         public MainWindow()
         {
             InitializeComponent();
+            loadedStore = new CStore();
         }
+
+
+
+        public void LoadNewCStore(CStore newCStore)
+        {
+
+        }
+
     }
 }

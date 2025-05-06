@@ -12,6 +12,12 @@
             <Button x:Name="buttonSearchStores" Content="Search Stores"/>
             <Button x:Name="buttonCreateTagOrder" Content="Create Tag Order"/>
         </Menu>
+        <Label Name="labelStoreNumber" Content="Store number: " HorizontalAlignment="Left" Margin="35,65,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelStoreAddress" Content="Store Address: " HorizontalAlignment="Left" Margin="35,96,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelStoreState" Content="State: " HorizontalAlignment="Left" Margin="35,127,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelStoreShipDate" Content="Ship Date: " HorizontalAlignment="Left" Margin="35,158,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelStorePONumber" Content="PO Number: " HorizontalAlignment="Left" Margin="35,189,0,0" VerticalAlignment="Top"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="700,59,10,10"/>
 
     </Grid>
 </Window>
