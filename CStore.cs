@@ -35,6 +35,10 @@ namespace StationTankManagementProject
         /// 
         /// </summary>
         public IList<FuelTank> StoreTanks { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string StorePONumber { get; set; }
 
         /// <summary>
         /// Default CStore constructor. Creates a "blank" CStore object with a store number of zero, an empty store address string, and a new, empty, fuel tank list.
@@ -47,6 +51,7 @@ namespace StationTankManagementProject
             this.StoreShipDate = DateTime.Now;
             this.StoreShippedDate = DateTime.Now;
             this.StoreTanks = new List<FuelTank>();
+            this.StorePONumber = string.Empty;
         }
 
         /// <summary>
@@ -55,7 +60,7 @@ namespace StationTankManagementProject
         /// <param name="storeNumber">An integer that is the store number of the desired CStore.</param>
         /// <param name="storeAddress">A string containing the address of the desired CStore.</param>
         /// <param name="tankList">A list of FuelTanks that represent the fuel tanks at this CStore.</param>
-        public CStore (int storeNumber, string storeAddress, string storeState, DateTime storeShipDate, DateTime? storeShippedDate, List<FuelTank> tankList)
+        public CStore (int storeNumber, string storeAddress, string storeState, DateTime storeShipDate, DateTime? storeShippedDate, List<FuelTank> tankList, string PONum)
         {
             this.StoreNumber = storeNumber;
             this.StoreAddress = storeAddress;
@@ -63,6 +68,7 @@ namespace StationTankManagementProject
             this.StoreShipDate = storeShipDate;
             this.StoreShippedDate = storeShippedDate;
             this.StoreTanks = tankList;
+            this.StorePONumber = PONum;
         }
 
     }
@@ -109,7 +115,7 @@ namespace StationTankManagementProject
     /// <summary>
     /// An enum for the various fuel types that might be stored in a fuel tank.
     /// </summary>
-    enum FuelType
+    public enum FuelType
     {
         UNL_GASOLINE,
         PREM_GASOLINE,

@@ -53,7 +53,7 @@ namespace StationTankManagementProject {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/StationTankManagementProject;V1.0.0.0;component/addstorewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StationTankManagementProject;component/addstorewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AddStoreWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
