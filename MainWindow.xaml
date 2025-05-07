@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:StationTankManagementProject"
         mc:Ignorable="d"
         Title="Home" Height="720" Width="1280">
-    <Grid Background="#FFB9B9B9">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+        </Grid.Background>
 
 
         <Label Name="labelStoreNumber" Content="Store number: " HorizontalAlignment="Left" Margin="38,100,0,0" VerticalAlignment="Top"/>

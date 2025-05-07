@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Add Store" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+        </Grid.Background>
+
     </Grid>
 </Window>
