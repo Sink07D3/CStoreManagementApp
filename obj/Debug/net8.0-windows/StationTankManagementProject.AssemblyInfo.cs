@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StationTankManagementProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2156a92701120b0b16b65a928ed2cbfd09304b20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a00191850bd4799326d59d9ab708cfc207de90b6")]
 [assembly: System.Reflection.AssemblyProductAttribute("StationTankManagementProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StationTankManagementProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

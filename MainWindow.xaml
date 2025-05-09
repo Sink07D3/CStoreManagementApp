@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StationTankManagementProject"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
         mc:Ignorable="d"
         Title="Home" Height="720" Width="1280">
-    <Grid>
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="FuelTypeDataSource"
+                        ObjectType="{x:Type sys:Enum}"
+                        MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:FuelType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <Grid Name="StoreGrid">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
         </Grid.Background>
@@ -17,18 +29,27 @@
         <Label x:Name="labelStoreState" Content="State: " HorizontalAlignment="Left" Margin="38,162,0,0" VerticalAlignment="Top"/>
         <Label x:Name="labelStoreShipDate" Content="Ship Date: " HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top"/>
         <Label x:Name="labelStorePONumber" Content="PO Number: " HorizontalAlignment="Left" Margin="38,224,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="datagridStoreTanks" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="700,59,10,10"/>
+        <DataGrid x:Name="datagridStoreTanks" AutoGenerateColumns="False" Margin="700,59,10,10" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tank Number" Binding="{Binding TankNumber}"/>
+                <DataGridComboBoxColumn Header="Tank Product" SelectedItemBinding="{Binding TankFuel}" ItemsSource="{Binding Source={StaticResource FuelTypeDataSource}}"/>
+                <DataGridTextColumn Header="Tank Capacity" Binding="{Binding TankCapacity}" />
+                <DataGridCheckBoxColumn Header="Has Vapor" Binding="{Binding HasVapor}" />
+            </DataGrid.Columns>
+        </DataGrid>
+                  
         <Button Name="buttonAddStore" Content="Add Store" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="TestCStoreMethod"/>
         <Button Name="buttonSearchStores" Content="Search Stores" HorizontalAlignment="Left" Margin="72,10,0,0" VerticalAlignment="Top"/>
         <Button Name="buttonGenerateTagOrder" Content="Generate Tag Order" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top"/>
         <Button Name="buttonSaveStoreChanges" Content="Save Store Changes" HorizontalAlignment="Left" Margin="38,62,0,0" VerticalAlignment="Top" Click="SaveLoadedCStoreChanges"/>
-        <Label x:Name="textboxStoreNumber" Content="Label" HorizontalAlignment="Left" Margin="131,100,0,0" VerticalAlignment="Top" Width="200" BorderBrush="Black" Background="White"/>
-        <Label x:Name="textboxStreetAddress" Content="Label" HorizontalAlignment="Left" Margin="131,131,0,0" VerticalAlignment="Top" Width="200" BorderBrush="Black" Background="White" Height="25.96"/>
-        <Label x:Name="textboxStoreState" Content="Label" HorizontalAlignment="Left" Margin="131,162,0,0" VerticalAlignment="Top" Width="200" Background="White"/>
-        <Label x:Name="textboxStoreShipDate" Content="Label" HorizontalAlignment="Left" Margin="131,193,0,0" VerticalAlignment="Top" Width="200" Background="White"/>
-        <Label x:Name="textboxPONumber" Content="Label" HorizontalAlignment="Left" Margin="131,224,0,0" VerticalAlignment="Top" Width="200" Background="White" Height="25.96"/>
+        <Label x:Name="textboxStoreNumber" Content="{Binding StoreNumber}" HorizontalAlignment="Left" Margin="131,100,0,0" VerticalAlignment="Top" Width="200" BorderBrush="Black" Background="White">
+        </Label>
+        <Label x:Name="textboxStreetAddress" Content="{Binding StoreAddress}" HorizontalAlignment="Left" Margin="131,131,0,0" VerticalAlignment="Top" Width="200" BorderBrush="Black" Background="White" Height="25.96"/>
+        <Label x:Name="textboxStoreState" Content="{Binding StoreState}" HorizontalAlignment="Left" Margin="131,162,0,0" VerticalAlignment="Top" Width="200" Background="White"/>
+        <Label x:Name="textboxStoreShipDate" Content="{Binding StoreShipDate}" HorizontalAlignment="Left" Margin="131,193,0,0" VerticalAlignment="Top" Width="200" Background="White"/>
+        <Label x:Name="textboxPONumber" Content="{Binding StorePONumber}" HorizontalAlignment="Left" Margin="131,224,0,0" VerticalAlignment="Top" Width="200" Background="White" Height="25.96"/>
         <Label x:Name="labelStoreShippedDate" Content="Shipped Date: " HorizontalAlignment="Left" Margin="38,255,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="textboxStoreShippedDate" Content="Label" HorizontalAlignment="Left" Margin="131,255,0,0" VerticalAlignment="Top" Width="200" Background="White" BorderBrush="Black" Height="25.96"/>
+        <Label x:Name="textboxStoreShippedDate" Content="{Binding StoreShippedDate}" HorizontalAlignment="Left" Margin="131,255,0,0" VerticalAlignment="Top" Width="200" Background="White" BorderBrush="Black" Height="25.96"/>
 
     </Grid>
 </Window>

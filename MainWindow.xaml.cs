@@ -17,16 +17,21 @@ namespace StationTankManagementProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private CStore loadedStore;
-
 
         public MainWindow()
         {
             InitializeComponent();
+            //this.DataContext = new MainWindowObject();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            this.loadedStore = new CStore();
-            this.datagridStoreTanks.AutoGenerateColumns = false;
+            //this.loadedStore = new CStore();
+            //this.datagridStoreTanks.AutoGenerateColumns = false;
             this.datagridStoreTanks.CanUserAddRows = true;
+            this.datagridStoreTanks.ItemsSource = Enum.GetValues(FuelType.UNL_GASOLINE.GetType());
+            //setup data bindings?
+            this.StoreGrid.DataContext = new CStore();
+
+
+
         }
 
 
@@ -34,11 +39,9 @@ namespace StationTankManagementProject
         public void LoadNewCStore(CStore newCStore)
         {
             this.DisableMainWindow();
-            //disable input
-            //clear visible data
-            this.loadedStore = newCStore;
-            this.RefreshLoadedCStoreData();
-            //enable input
+            this.StoreGrid.DataContext = newCStore;
+            //this.datagridStoreTanks.ItemsSource = GenerateStoreTankTable(newCStore).DefaultView;
+            this.datagridStoreTanks.DataContext = newCStore.StoreTanks;
             this.EnableMainWindow();
         }
 
@@ -68,27 +71,7 @@ namespace StationTankManagementProject
             this.textboxStoreState.IsEnabled = true;
         }
 
-        private void ClearLoadedData()
-        {
-            //textbox
-            this.textboxStoreNumber.Content = string.Empty;
-            this.textboxPONumber.Content = string.Empty;
-            this.textboxStoreShipDate.Content = string.Empty;
-            this.textboxStoreShippedDate.Content = string.Empty;
-            this.textboxStoreState.Content = string.Empty;
-            this.textboxStreetAddress.Content = string.Empty;
-            //tank dataGrid
-            this.datagridStoreTanks.Columns.Clear();
-            
-        }
-
-        public void RefreshLoadedCStoreData()
-        {
-            this.ClearLoadedData();
-            this.PopulateLoadedData();
-
-        }
-
+        
         private void PopulateLoadedData()
         {
             FuelType[] fuelTypes =
@@ -103,14 +86,15 @@ namespace StationTankManagementProject
                 FuelType.BIODIESEL_B99,
                 FuelType.DEF
             };
+
+            ///datagrid
+
             //textbox
-            this.textboxStoreNumber.Content = this.loadedStore.StoreNumber;
-            this.textboxPONumber.Content = this.loadedStore.StorePONumber;
-            this.textboxStoreShipDate.Content = this.loadedStore.StoreShipDate;
-            this.textboxStoreShippedDate.Content = this.loadedStore.StoreShippedDate;
-            this.textboxStoreState.Content = this.loadedStore.StoreState;
-            this.textboxStreetAddress.Content = this.loadedStore.StoreAddress;
-            //datagrid
+            this.textboxPONumber.SetBinding(TextBox.TextProperty, new Binding("StorePONumber"));
+            this.textboxStoreNumber.SetBinding(TextBox.TextProperty, new Binding("StoreNumber"));
+
+
+
             //datagrid columns are tank number, product, capacity, hasVapor
 
             DataGridTextColumn tankNumCol = new DataGridTextColumn();
@@ -121,7 +105,7 @@ namespace StationTankManagementProject
             tankProdCol.SelectedValuePath = "TankProd";
             tankProdCol.ItemsSource = fuelTypes;
             tankProdCol.Header = "Tank Product";
-            //tankProdCol.DisplayMemberPath = fuelTypes;
+            tankProdCol.DisplayMemberPath = "TankProd";
             DataGridTextColumn tankCapCol = new DataGridTextColumn();
             tankCapCol.Binding = new Binding("TankCap");
             tankCapCol.Header = "Tank Capacity (Gals)";
@@ -133,10 +117,10 @@ namespace StationTankManagementProject
             this.datagridStoreTanks.Columns.Add(tankProdCol);
             this.datagridStoreTanks.Columns.Add(tankCapCol);
             this.datagridStoreTanks.Columns.Add(tankVapCol);
-            DataTable storeTankTable = this.GenerateStoreTankTable(this.loadedStore);
-            this.datagridStoreTanks.ItemsSource = storeTankTable.DefaultView;
+            //DataTable storeTankTable = this.GenerateStoreTankTable(this.DataContext);
+            //this.datagridStoreTanks.ItemsSource = storeTankTable.DefaultView;
             
-            this.datagridStoreTanks.DataContext = storeTankTable;
+            //this.datagridStoreTanks.DataContext = storeTankTable;
         }
 
         /// <summary>
@@ -158,7 +142,7 @@ namespace StationTankManagementProject
             fuelTanks.Add(new FuelTank(4, FuelType.ETHANOL_FREE_GASOLINE, 10000, true));
             fuelTanks.Add(new FuelTank(5, FuelType.DEF, 6000, false));
 
-            CStore testStore = new CStore(752, "Your mom's house", "UT", DateTime.Now, null, fuelTanks, "PowerM420");
+            CStore testStore = new CStore(752, "Your mom's house", "AZ", DateTime.Now, null, fuelTanks, "PowerM420");
 
 
             this.LoadNewCStore(testStore);
@@ -213,8 +197,29 @@ namespace StationTankManagementProject
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return new DataTable(); //return an empty data table if an exception is thrown
             }
         }
     }
+
+    public class MainWindowObject
+    {
+        //properties
+        public CStore LoadedStore {  get; set; }
+        public string WindowName { get; set; }
+        public MainWindowObject()
+        {
+            this.LoadedStore = new CStore();
+            this.WindowName = "Tank Management";
+        }
+
+        public MainWindowObject(CStore newCStore)
+        {
+            this.LoadedStore = newCStore;
+            this.WindowName = "Tank Management";
+        }
+    }
+
+
 }

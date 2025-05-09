@@ -86,6 +86,7 @@ namespace StationTankManagementProject
         /// 
         /// </summary>
         public FuelType TankFuel { get; set; }
+       // public int TankFuelID { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -106,6 +107,21 @@ namespace StationTankManagementProject
         {
             TankNumber = tankNum;
             TankFuel = storedFuel;
+            TankCapacity = tankCapacity;
+            HasVapor = vapor;
+        }
+
+        /// <summary>
+        /// FuelTank constructor taking an ID instead of a storedFuel type. 0 is UNL, 1 is prem, 2 is diesel, 3 is eth free, 4 is eco e15, 5 is e85, 6 is midgrade, 7 is biodiesel, 8 is DEF
+        /// </summary>
+        /// <param name="tankNum"></param>
+        /// <param name="storedFuelID"></param>
+        /// <param name="tankCapacity"></param>
+        /// <param name="vapor"></param>
+        public FuelTank(int tankNum, int storedFuelID, int tankCapacity, bool vapor)
+        {
+            TankNumber = tankNum;
+            //TankFuelID = storedFuelID;
             TankCapacity = tankCapacity;
             HasVapor = vapor;
         }
